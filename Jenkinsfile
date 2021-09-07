@@ -6,7 +6,7 @@ pipeline {
                 withSonarQubeEnv('Sonarqube') {
                     sh 'ls'
                     sh 'mvn -version'
-                    sh 'mvn clean package sonar:sonar'
+                    
                 }
             }
         }
