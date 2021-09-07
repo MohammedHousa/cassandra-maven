@@ -8,8 +8,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'ls'
                 withSonarQubeEnv('Sonarqube') {
+                    sh 'ls'
                     sh 'apt update'
                     sh 'apt install maven'
                     sh "mvn -version"
