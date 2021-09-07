@@ -5,9 +5,8 @@ pipeline {
             steps {
                 sh 'ls'
                 withSonarQubeEnv('Sonarqube') {
-                    // Optionally use a Maven environment you've configured already
-                    
-                        sh 'mvn clean package sonar:sonar'
+                    sh 'apt install maven'
+                    sh 'mvn clean package sonar:sonar'
                     
                 }
             }
