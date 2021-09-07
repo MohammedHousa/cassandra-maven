@@ -4,14 +4,12 @@ pipeline {
         stage('build && SonarQube analysis') {
             agent {
                 docker {
-                    image 'ubuntu'
+                    image 'sh 'ls''
                 }
             }
             steps {
                 withSonarQubeEnv('Sonarqube') {
                     sh 'ls'
-                    sh 'apt update'
-                    sh 'apt install maven'
                     sh "mvn -version"
                     
                 }
