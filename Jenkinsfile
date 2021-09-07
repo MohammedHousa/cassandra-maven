@@ -1,12 +1,12 @@
 pipeline {
     agent any
     stages {
-        agent{
-            docker{
-                image 'maven'
-            }
-        }
         stage('build && SonarQube analysis') {
+            agent {
+                docker {
+                    image 'maven'
+                }
+            }
             steps {
                 withSonarQubeEnv('Sonarqube') {
                     sh 'ls'
