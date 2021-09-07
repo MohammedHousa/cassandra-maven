@@ -9,9 +9,9 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('Sonarqube') {
-                    sh 'ls'
-                    sh 'mvn -version'
-                    sh 'mvn sonar:sonar'
+                    withMaven(maven:'Maven 3.5') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
                 }
             }
         }
