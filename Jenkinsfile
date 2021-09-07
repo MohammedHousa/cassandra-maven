@@ -5,9 +5,9 @@ pipeline {
             steps {
                 sh 'ls'
                 withSonarQubeEnv('Sonarqube') {
-                    sh 'apt install maven'
-                    sh 'mvn clean package sonar:sonar'
-                    
+                    withMaven {
+                        sh "mvn clean verify"
+                    }  
                 }
             }
         }
