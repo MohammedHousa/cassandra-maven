@@ -10,7 +10,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     sh 'ls'
-                    sh 'mvn sonar:sonar'
+                    sh 'mvn sonar:sonar -Dsonar.password'
                 }
             }
         }
