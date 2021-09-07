@@ -11,7 +11,7 @@ pipeline {
                 withSonarQubeEnv('Sonarqube') {
                     sh 'ls'
                     sh 'mvn -version'
-                    sh 'mvn sonar:sonar'
+                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
                 }
             }
         }
