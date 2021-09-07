@@ -1,11 +1,23 @@
 pipeline {
     agent any
-
     stages {
-        stage('SonarQube analysis') {
-            steps{
-                withSonarQubeEnv(credentialsId: '54d46da8ad21eef2a1bff91a8310a0558257bbe5', installationName: 'msami2030') { // You can override the credential to be used
-                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+        stage('build && SonarQube analysis') {
+            steps {
+                sh 'ls'
+                withSonarQubeEnv('My SonarQube Server') {
+                    // Optionally use a Maven environment you've configured already
+                    withMaven(maven:'Maven 3.5') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                }
+            }
+        }
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
